@@ -16,6 +16,6 @@ export const TodoContext = createContext({
 
 export const TodoProvider = TodoContext.Provider
 
-export function useTheme (){
+export function useTodo (){
     return useContext(TodoContext)
 }

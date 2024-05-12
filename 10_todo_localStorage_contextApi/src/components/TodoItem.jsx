@@ -1,10 +1,23 @@
 import React, { useState } from 'react'
-
+import {useTodo} from '../contexts/TodoContext'
 
 function TodoItem({ todo }) {
+    
+    const {updateTodo, toggleTodo, deleteTodo} = useTodo()
 
     const [isTodoEditable, setIsTodoEditable] = useState(false)
-    const [todoMsg, setTodoMsg] = useState("")
+    const [todoMsg, setTodoMsg] = useState(todo.todo)
+
+
+    const editTodo = ()=> {
+        // updateTodo(id, todo)
+        updateTodo(todo.id, { ...todo, todo: todoMsg })
+        setIsTodoEditable(false)
+    }
+
+    const toggleCompleted = () => {
+        toggleTodo (todo.id)
+    }
 
     return (
         <div
@@ -22,7 +35,7 @@ function TodoItem({ todo }) {
                 type="text"
                 className={`border outline-none w-full bg-transparent rounded-lg ${
                     isTodoEditable ? "border-black/10 px-2" : "border-transparent"
-                } ${todo.completed ? "line-through" : ""}`}
+                } ${todo.isCompleted ? "line-through" : ""}`}
                 value={todoMsg}
                 onChange={(e) => setTodoMsg(e.target.value)}
                 readOnly={!isTodoEditable}
@@ -31,7 +44,7 @@ function TodoItem({ todo }) {
             <button
                 className="inline-flex w-8 h-8 rounded-lg text-sm border border-black/10 justify-center items-center bg-gray-50 hover:bg-gray-100 shrink-0 disabled:opacity-50"
                 onClick={() => {
-                    if (todo.completed) return;
+                    if (todo.isCompleted) return;
 
                     if (isTodoEditable) {
                         editTodo();
@@ -53,3 +66,4 @@ function TodoItem({ todo }) {
 }
 
 export default TodoItem;
+
