@@ -3,8 +3,7 @@ import { useDispatch } from "react-redux";
 import "./App.css";
 import authService from "./appwrite/auth";
 import { login, logout } from "./store/authSlice";
-import Header from "./components/header/Header";
-import Footer from "./components/footer/Footer";
+import { Header, Footer } from "./components/index";
 import { Outlet } from "react-router-dom";
 
 function App() {
@@ -20,8 +19,8 @@ function App() {
           dispatch(logout());
         }
       })
-      .catch(e)(console.log(e))
-      .finally((setLoading = false));
+      .catch((e) => console.log(e))
+      .finally(() => setLoading(false));
   });
 
   return !loading ? (
@@ -32,7 +31,9 @@ function App() {
       </main>
       <Footer />
     </div>
-  ) : null;
+  ) : (
+    <span className="loading loading-spinner loading-lg"></span>
+  );
 }
 
 export default App;

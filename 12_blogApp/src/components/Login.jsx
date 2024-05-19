@@ -63,7 +63,7 @@ function Login() {
                 required: true,
                 validate: {
                   matchPatern: (value) =>
-                    //   regular expression :- get it from REGEXP website , it is bound between / and \
+                    //   regular expression :- get it from REGEXP website , it is bound between / and /
                     /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
                     // if the test fails the regualar expression then value is ...
                     "Email address must be a valid address",
